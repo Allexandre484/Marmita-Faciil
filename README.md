@@ -56,12 +56,14 @@ marmitafacil/
 - Destaque visual para personalizações e observações do pedido.
 - Fila responsiva, com rolagem horizontal em telas maiores e organização em coluna no celular.
 - Registro de pagamento.
-- Resumo de valores recebidos.\n- Fechamento diário por data, com total vendido, recebido, pendente e divisão dos recebimentos por Pix, dinheiro e cartão.
+- Resumo de valores recebidos.
+- Fechamento diário por data, com total vendido, recebido, pendente e divisão dos recebimentos por Pix, dinheiro e cartão.
+- Histórico de pedidos por data, com consulta dos pedidos em ordem do mais recente para o mais antigo, sem ações de alteração na fila.
 
 ## Próximas etapas
 
 - Melhorar o controle de entregas.
-- Ampliar o histórico de pedidos e validar o fechamento diário do caixa com usuários.
+- Validar o histórico de pedidos e o fechamento diário do caixa com usuários.
 - Realizar testes com pelo menos duas pessoas e registrar os resultados.
 - Criar o Product Backlog, quadro Kanban e planejamento das Sprints.
 
