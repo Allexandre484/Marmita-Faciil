@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { calculateTotal, createOrder, nextStatus, sumReceived } = require("../js/orders.js");
+const { calculateTotal, createOrder, nextStatus, sumReceived, filterOrdersByDate } = require("../js/orders.js");
 
 test("calcula o valor da marmita com adicional e quantidade", () => {
   assert.equal(calculateTotal({ meal: "M", quantity: 2, extraFarofa: true }), 48);
@@ -54,4 +54,21 @@ test("resume as vendas, recebimentos e pendências somente na data escolhida", (
   assert.equal(summary.pending, 25);
   assert.equal(summary.pendingCount, 1);
   assert.deepEqual(summary.byMethod, { Pix: 30, Dinheiro: 0, "Cartão": 40 });
+});
+
+
+test("filtra o histórico pela data e ordena do mais recente para o mais antigo", () => {
+  const orders = [
+    { id: 1, createdAt: "2026-11-27T09:00:00-03:00" },
+    { id: 2, createdAt: "2026-11-26T10:00:00-03:00" },
+    { id: 3, createdAt: "2026-11-27T14:30:00-03:00" }
+  ];
+  assert.deepEqual(
+    filterOrdersByDate(orders, "2026-11-27").map(order => order.id),
+    [3, 1]
+  );
+});
+
+test("histórico sem data selecionada não retorna pedidos", () => {
+  assert.deepEqual(filterOrdersByDate([{ createdAt: "2026-11-27T09:00:00-03:00" }], ""), []);
 });
