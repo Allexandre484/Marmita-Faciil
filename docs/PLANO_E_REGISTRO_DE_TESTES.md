@@ -61,3 +61,16 @@ Os testes abaixo precisam ser realizados com duas pessoas. Não preencher result
 - Status avança pelo fluxo definido.
 - Caixa soma somente pedidos pagos.
 - Interface permite cadastro simples e leitura rápida.
+
+## Registro de validação — 2026-11-27
+
+### Melhoria: fila da cozinha organizada por etapa
+- Arquivos envolvidos: `js/app.js` e `css/style.css`.
+- Documentação complementar: `README.md` e `docs/REGISTRO_DE_ADICOES.md`.
+- Cenário manual 1: cadastrar pedidos em diferentes status e conferir se cada pedido aparece na coluna correspondente.
+- Cenário manual 2: conferir os contadores de cada coluna após avançar o status de um pedido.
+- Cenário manual 3: cadastrar pedidos com Sem feijão, Sem salada, Farofa extra e observações; conferir se os avisos aparecem no cartão.
+- Cenário manual 4: abrir a aplicação em tela estreita e conferir a organização responsiva.
+- Regressão: executar `npm test` para verificar se cálculo, personalizações, status e recebimentos continuam funcionando.
+- Resultado: pendente de execução local. Não declarar os cenários aprovados antes de testá-los.
+- Observação: a fila apresenta as etapas Recebido, Em preparo, Pronto, Saiu para entrega e Entregue. O fluxo específico de retirada ainda será desenvolvido.
