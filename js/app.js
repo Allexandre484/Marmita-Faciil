@@ -91,7 +91,7 @@
         <div class="card-actions">
           ${canAdvance ? `<button class="small-button" data-action="advance" data-id="${escapeHTML(order.id)}">Avançar para: ${escapeHTML(next)}</button>` : ""}
           ${order.service !== "Retirada" ? `<button class="small-button" data-action="courier" data-id="${escapeHTML(order.id)}">${order.courierName ? "Alterar entregador" : "Definir entregador"}</button>` : ""}
-          <button class="small-button" data-action="payment" data-id="${escapeHTML(order.id)}">${order.paid ? "Marcar pendente" : "Marcar pago"}</button>
+          <button class="small-button" data-action="payment" data-id="${escapeHTML(order.id)}">${order.paid ? "Marcar pendente" : "Marcar pago"}</button>\n          <button class="small-button whatsapp-button" data-action="whatsapp" data-id="${escapeHTML(order.id)}">WhatsApp</button>
         </div>
       </div>
     </article>`;
@@ -178,7 +178,7 @@
     if (!button) return;
     const order = orders.find(item => String(item.id) === button.dataset.id);
     if (!order) return;
-    if (button.dataset.action === "advance") order.status = rules.nextStatus(order.status, order.service);
+    if (button.dataset.action === "whatsapp") {\n      try {\n        const whatsappUrl = rules.buildWhatsAppLink(order);\n        window.open(whatsappUrl, "_blank", "noopener,noreferrer");\n      } catch (error) { alert(error.message); }\n      return;\n    }\n    if (button.dataset.action === "advance") order.status = rules.nextStatus(order.status, order.service);
     if (button.dataset.action === "payment") order.paid = !order.paid;
     if (button.dataset.action === "courier") {
       const name = prompt("Informe o nome do entregador:", order.courierName || "");
