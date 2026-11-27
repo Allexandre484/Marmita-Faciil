@@ -2,6 +2,12 @@
 
 Este documento reúne como o MarmitaFácil foi planejado e desenvolvido, relacionando as atividades às práticas solicitadas na disciplina.
 
+## Aplicação publicada
+
+A versão web do projeto pode ser acessada pelo GitHub Pages:
+
+**[https://allexandre484.github.io/Marmita-Faciil/](https://allexandre484.github.io/Marmita-Faciil/)**
+
 ## 1. Design Sprint
 
 ### Problema identificado
