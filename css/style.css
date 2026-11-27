@@ -98,3 +98,79 @@ fieldset legend { padding: 0 5px; }
   .check-row { flex-direction: column; }
   .dialog-actions .button { flex: 1; }
 }
+
+/* Organização visual da fila da cozinha */
+.orders-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(235px, 1fr));
+  align-items: start;
+  gap: 13px;
+  overflow-x: auto;
+  padding: 2px 2px 12px;
+}
+.stage-column {
+  min-width: 235px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #f8faf9;
+}
+.stage-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 34px;
+  margin-bottom: 11px;
+}
+.stage-heading h3 { margin: 0; font-size: 14px; }
+.stage-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 25px;
+  height: 25px;
+  padding: 0 7px;
+  border-radius: 99px;
+  background: #e9eeeb;
+  color: #42564a;
+  font-size: 12px;
+  font-weight: 800;
+}
+.stage-orders { display: grid; gap: 10px; }
+.stage-empty { margin: 0; padding: 18px 8px; color: #929a95; text-align: center; font-size: 12px; }
+.stage-column .order-card {
+  grid-template-columns: 1fr;
+  gap: 11px;
+  padding: 13px;
+  background: white;
+}
+.stage-column .order-side { align-items: flex-start; }
+.stage-column .order-topline { align-items: flex-start; }
+.stage-column .order-topline strong { overflow-wrap: anywhere; }
+.stage-column .order-meta { line-height: 1.5; overflow-wrap: anywhere; }
+.customization-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.customization-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 8px;
+  border: 1px solid #f0d49e;
+  border-radius: 7px;
+  background: #fff5df;
+  color: #80520d;
+  font-size: 11px;
+  font-weight: 800;
+}
+.stage-column .order-notes {
+  padding: 8px 9px;
+  border-left: 3px solid #d8a34b;
+  border-radius: 4px;
+  background: #fffaf0;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.stage-column .card-actions { width: 100%; }
+.stage-column .small-button { flex: 1; }
+@media (max-width: 720px) {
+  .orders-list { grid-template-columns: minmax(245px, 1fr); overflow-x: visible; }
+  .stage-column { min-width: 0; }
+}
