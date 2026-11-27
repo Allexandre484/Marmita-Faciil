@@ -176,3 +176,8 @@ Os testes abaixo precisam ser realizados com duas pessoas. Não preencher result
 - T05: após abrir o formulário, preencher os campos obrigatórios e salvar; confirmar que o pedido aparece na fila.
 - Testes automatizados: verificação de sintaxe e suíte `npm test` no GitHub Actions.
 - Testes manuais: pendentes de confirmação no navegador do usuário.
+
+
+## Aplicação para execução dos testes manuais
+- Endereço publicado no GitHub Pages: https://allexandre484.github.io/Marmita-Faciil/
+- Utilize esse endereço para realizar os cenários manuais descritos neste documento. O resultado só deve ser marcado como aprovado depois da execução no navegador.
