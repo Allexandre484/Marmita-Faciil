@@ -46,7 +46,7 @@
   }
 
   function buildWhatsAppLink(order) {
-    const rawPhone = String(order.phone || "").replace(/\\D/g, "");
+    const rawPhone = String(order.phone || "").replace(/\D/g, "");
     const phone = rawPhone.length === 10 || rawPhone.length === 11
       ? "55" + rawPhone
       : rawPhone.startsWith("55") && (rawPhone.length === 12 || rawPhone.length === 13)
@@ -73,7 +73,7 @@
       "Total: R$ " + Number(order.total).toFixed(2).replace(".", ","),
       "Obrigado pela preferência!"
     ].filter(Boolean);
-    return "https://wa.me/" + phone + "?text=" + encodeURIComponent(lines.join("\\n"));
+    return "https://wa.me/" + phone + "?text=" + encodeURIComponent(lines.join("\n"));
   }
 
   function nextStatus(status, service = "Entrega") {
