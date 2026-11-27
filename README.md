@@ -1,75 +1,81 @@
 # MarmitaFácil
 
-Web App acadêmico para ajudar uma pequena marmitaria a organizar pedidos, cozinha, entregas e pagamentos.
+Aplicação web acadêmica para apoiar a rotina de uma pequena marmitaria, centralizando pedidos, acompanhamento da cozinha, entregas e pagamentos.
 
 ## Objetivo
 
-Reduzir a desorganização dos pedidos recebidos pelo WhatsApp, evitar erros de personalização e facilitar o acompanhamento dos pagamentos.
+Organizar os pedidos recebidos pela marmitaria, reduzir erros de personalização e facilitar o acompanhamento da produção e dos recebimentos.
+
+## Funcionalidades
+
+- Cadastro e consulta de pedidos.
+- Seleção de tamanho, quantidade e personalizações, com cálculo automático do valor.
+- Registro de observações, endereço, forma de pagamento e entregador.
+- Acompanhamento da produção por etapas: Recebido, Em preparo, Pronto, Saiu para entrega e Entregue.
+- Fluxo simplificado para retirada, sem etapa de entrega.
+- Controle de pagamentos recebidos e pendentes.
+- Fechamento diário do caixa, com totais por forma de pagamento.
+- Histórico de pedidos por data.
+- Atalho para WhatsApp com mensagem pré-preenchida. O envio é manual: a pessoa responsável revisa e confirma a mensagem no WhatsApp.
 
 ## Tecnologias
 
 - HTML5
 - CSS3
 - JavaScript puro
-- LocalStorage para persistência local
+- LocalStorage para armazenamento local
 - Node.js Test Runner para testes automatizados
+- GitHub Actions para verificação automatizada e publicação
 
 ## Como executar
 
-1. Baixe ou clone este repositório.
+1. Clone ou baixe este repositório.
 2. Abra a pasta do projeto.
-3. Abra o arquivo `index.html` no navegador.
+3. Abra `index.html` em um navegador atualizado.
 
-Os pedidos ficam armazenados no LocalStorage do navegador utilizado. Para uma demonstração em sala, use sempre o mesmo navegador e dispositivo. O histórico consulta os pedidos salvos localmente e não sincroniza entre dispositivos.
+**Atenção:** os dados são armazenados no LocalStorage do navegador e dispositivo utilizados. Não há banco de dados em nuvem nem sincronização entre dispositivos. Limpar os dados do navegador pode apagar os pedidos salvos.
 
-## Como executar os testes
+## Testes
 
-É necessário ter Node.js instalado. No terminal, dentro da pasta do projeto, execute:
+É necessário ter Node.js instalado. Na pasta do projeto, execute:
 
 ```bash
 npm test
 ```
 
-O GitHub Actions também executa os testes automaticamente a cada atualização da branch `main` e em pull requests. Na execução de 27/11/2026, os 15 testes automatizados estavam aprovados.
+A verificação automatizada também é executada pelo GitHub Actions a cada atualização da branch principal e em pull requests. Os testes cobrem regras de pedidos e cálculos implementados no módulo de pedidos.
 
-## Estrutura
+## Estrutura do projeto
 
 ```text
-marmitafacil/
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   ├── app.js
-│   └── orders.js
-├── tests/
-│   └── orders.test.js
-├── package.json
+.
+├── .github/workflows/   # Automação de testes e publicação
+├── css/                 # Estilos da aplicação
+├── docs/                # Documentação do projeto e registros
+├── js/                  # Lógica da aplicação
+├── tests/               # Testes automatizados
+├── index.html           # Página principal
+├── package.json         # Configuração dos testes
 └── README.md
 ```
 
-## Funcionalidades iniciais
+## Documentação acadêmica
 
-- Cadastro de pedidos.
-- Personalização de marmitas.
-- Cálculo automático do total.
-- Fila de pedidos organizada por etapa da cozinha, com contagem por status.
-- Fluxo de status adaptado ao tipo de pedido: retirada não passa pela etapa de entrega.
-- Destaque visual para personalizações e observações do pedido.
-- Fila responsiva, com rolagem horizontal em telas maiores e organização em coluna no celular.
-- Registro de pagamento.
-- Resumo de valores recebidos.
-- Fechamento diário por data, com total vendido, recebido, pendente e divisão dos recebimentos por Pix, dinheiro e cartão.
-- Histórico de pedidos por data, com consulta dos pedidos em ordem do mais recente para o mais antigo, sem ações de alteração na fila.
-- Cadastro opcional do entregador no pedido, com possibilidade de definir ou alterar o responsável depois; pedidos de retirada não exibem essa opção.\n- Integração gratuita com WhatsApp por link `wa.me`: o botão no pedido abre a conversa do cliente com o resumo preenchido. A pessoa responsável ainda precisa revisar e tocar em Enviar; não há disparo automático nem uso da API oficial.
+Os documentos de apoio às entregas estão na pasta [docs](docs/):
 
-## Próximas etapas
+- [Registro de adições e decisões](docs/REGISTRO_DE_ADICOES.md)
+- [Plano e registro de testes](docs/PLANO_E_REGISTRO_DE_TESTES.md)
 
-- Validar manualmente o cadastro e a alteração do entregador.
-- Validar o histórico de pedidos e o fechamento diário do caixa com usuários.
-- Realizar testes com pelo menos duas pessoas e registrar os resultados.
-- Criar o Product Backlog, quadro Kanban e planejamento das Sprints.
+## Gestão do projeto
 
-## Transparência no uso de IA
+O acompanhamento das atividades da equipe é feito no [quadro Marmita Fácil no Jira](https://a-team-xn76axk5.atlassian.net/jira/software/projects/MF/boards/2). O repositório contém o código-fonte e a documentação necessária para compreender e avaliar o projeto.
 
-A IA foi utilizada como copiloto para apoiar a estrutura inicial, sugerir organização dos arquivos e auxiliar na elaboração dos testes. As decisões de produto devem ser revisadas pela equipe, considerando a rotina da persona. Durante o desenvolvimento, registrar neste documento os erros identificados, as correções realizadas manualmente e as decisões finais tomadas pela equipe.
+## Limitações conhecidas
+
+- Os pedidos ficam salvos apenas no navegador utilizado.
+- O link do WhatsApp não envia mensagens automaticamente.
+- Não há rastreamento GPS ou acompanhamento de entregas em tempo real.
+
+## Uso de inteligência artificial
+
+A IA foi utilizada como ferramenta de apoio para sugestões, revisão e identificação de possíveis erros. As decisões sobre funcionalidades, validação dos resultados, testes e ajustes finais devem ser avaliadas e assumidas pela equipe. O histórico de alterações e testes é mantido na documentação e nos commits do repositório.
