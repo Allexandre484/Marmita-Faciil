@@ -2,7 +2,8 @@ name: Publicar MarmitaFácil no GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,30 +12,29 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: github-pages
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Baixar código
+      - name: Baixar código do repositório
         uses: actions/checkout@v4
+
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Preparar arquivos do site
-        uses: actions/upload-pages-artifact@v3
+
+      - name: Enviar arquivos do site
+        uses: actions/upload-pages-artifact@v4
         with:
           path: .
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
+
       - name: Publicar site
         id: deployment
         uses: actions/deploy-pages@v4
