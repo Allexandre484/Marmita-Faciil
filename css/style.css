@@ -271,3 +271,20 @@ fieldset legend { padding: 0 5px; }
 /* Cadastro e identificação do entregador */
 .order-card .order-meta strong { color: var(--text); }
 #courier-field[hidden], #address-field[hidden] { display: none; }
+
+
+/* Compatibilidade: mantém o cadastro visível mesmo sem showModal() */
+body.dialog-open::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(20, 28, 24, .48);
+}
+.order-dialog[open] {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  margin: auto;
+  max-height: 92vh;
+}
