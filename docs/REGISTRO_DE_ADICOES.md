@@ -25,6 +25,8 @@ Atualize este documento a cada entrega relevante.
 | Resumo de recebimentos | Implementada |
 | Salvamento local | Implementada |
 | Testes das regras iniciais | Implementados |
+| Fila visual separada por etapa | Implementada |
+| Personalizações em destaque | Implementada |
 
 ## Limitações
 - LocalStorage não sincroniza dispositivos.
@@ -32,18 +34,26 @@ Atualize este documento a cada entrega relevante.
 - Entregador não está implementado.
 - Fechamento diário detalhado e histórico por data estão planejados.
 - Substituição de salada por farofa é anotada em observações.
+- O sistema ainda não possui data/hora prevista do pedido; por isso, não calcula atrasos automaticamente.
 - Fluxo de status ainda pode ser refinado para retirada e entrega.
 
 ## Próximas adições
 | Prioridade | Adição | Critério |
 |---|---|---|
-| Alta | Destaque das personalizações | Cozinha identifica alterações rapidamente |
-| Alta | Separação por etapas | Pedidos agrupados por situação |
-| Alta | Fluxo de retirada e entrega | Etapas adequadas ao tipo de pedido |
+| Alta | Fluxo específico de retirada e entrega | Etapas adequadas ao tipo de pedido |
+| Alta | Fechamento por data e pagamento | Totais conferem com pedidos pagos |
 | Média | Nome do entregador | Pedido registra responsável |
-| Média | Fechamento por data e pagamento | Totais conferem com pedidos pagos |
 | Média | Histórico | Consulta pedidos anteriores |
-| Média | Aviso de atraso | Pedido antigo recebe destaque |
+| Média | Aviso de atraso | Pedido com horário previsto recebe destaque |
+
+## 2026-11-27 — Organização visual da cozinha
+- Problema: a fila anterior mostrava todos os pedidos em uma lista única, dificultando a identificação rápida da etapa de produção.
+- Arquivos alterados: `js/app.js`, `css/style.css`.
+- Implementação: pedidos agrupados em colunas por status; cada coluna mostra a quantidade de pedidos; personalizações e observações receberam destaque visual.
+- Verificação: conferir manualmente a exibição com pedidos em diferentes status e em tela pequena; executar `npm test`.
+- Resultado dos testes: registrar após execução no ambiente local.
+- Commit: registrado no histórico do GitHub após a publicação desta alteração.
+- Pendências: fluxo de retirada e entrega específico; datas/horários previstos para permitir alerta de atraso.
 
 ## Modelo para nova alteração
 ### [Data] — [Nome]
