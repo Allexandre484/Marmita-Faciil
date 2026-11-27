@@ -1,0 +1,16 @@
+﻿Issue Type,Summary,Description,Priority,Labels
+Epic,Sprint 1 — Cadastro e cozinha,Entregar o fluxo básico de registro e acompanhamento dos pedidos na cozinha.,High,sprint-1
+Story,Cadastrar cliente e pedido,"Como Marta, quero cadastrar um pedido com nome e contato para não perder informações.",High,sprint-1
+Story,Selecionar tamanho e quantidade,"Como Marta, quero selecionar tamanho e quantidade para calcular o preço corretamente.",High,sprint-1
+Story,Registrar personalizações,"Como Marta, quero registrar personalizações para a cozinha montar a marmita corretamente.",High,sprint-1
+Story,Visualizar fila da cozinha,"Como Marta, quero visualizar os pedidos por situação para organizar a fila da cozinha.",High,sprint-1
+Story,Alterar status do pedido,"Como Marta, quero avançar o status do pedido para acompanhar o preparo.",High,sprint-1
+Story,Testar regras críticas da Sprint 1,"Como equipe, queremos testar cálculo, personalização e mudança de status para evitar erros.",High,sprint-1
+Epic,Sprint 2 — Entregas e caixa,"Organizar a saída dos pedidos, registrar pagamentos e conferir o faturamento.",High,sprint-2
+Story,Identificar entrega ou retirada,"Como Marta, quero identificar se o pedido é entrega ou retirada para organizar a saída.",High,sprint-2
+Story,Registrar endereço e entregador,"Como Marta, quero registrar endereço e entregador para reduzir atrasos.",Medium,sprint-2
+Story,Marcar situação do pagamento,"Como Marta, quero marcar o pagamento como recebido ou pendente para controlar o caixa.",High,sprint-2
+Story,Consultar total por forma de pagamento,"Como Marta, quero consultar o total recebido por forma de pagamento para fechar o caixa.",High,sprint-2
+Story,Consultar histórico de pedidos,"Como Marta, quero consultar pedidos anteriores para conferir informações.",Medium,sprint-2
+Story,Identificar pedidos atrasados,"Como Marta, quero identificar pedidos atrasados para priorizar a entrega.",Medium,sprint-2
+Story,Testar regras críticas da Sprint 2,"Como equipe, queremos testar pagamentos e fechamento do caixa para evitar divergências.",High,sprint-2
