@@ -150,9 +150,36 @@
     catch { $("#price-preview").textContent = "—"; }
   }
 
-  $("#new-order-button").addEventListener("click", () => dialog.showModal());
-  $("#close-dialog").addEventListener("click", () => dialog.close());
-  $("#cancel-dialog").addEventListener("click", () => dialog.close());
+  function openOrderDialog() {
+    if (!dialog) {
+      alert("Não foi possível localizar a janela de cadastro. Atualize a página e tente novamente.");
+      return;
+    }
+    try {
+      if (typeof dialog.showModal === "function") {
+        if (!dialog.open) dialog.showModal();
+      } else {
+        // Compatibilidade com navegadores sem suporte ao método showModal().
+        dialog.setAttribute("open", "");
+        document.body.classList.add("dialog-open");
+      }
+    } catch (error) {
+      console.error("Erro ao abrir o cadastro de pedidos:", error);
+      dialog.setAttribute("open", "");
+      document.body.classList.add("dialog-open");
+    }
+  }
+  function closeOrderDialog() {
+    if (!dialog) return;
+    if (typeof dialog.close === "function" && dialog.open) dialog.close();
+    else dialog.removeAttribute("open");
+    document.body.classList.remove("dialog-open");
+  }
+
+  $("#new-order-button").addEventListener("click", openOrderDialog);
+  $("#close-dialog").addEventListener("click", closeOrderDialog);
+  $("#cancel-dialog").addEventListener("click", closeOrderDialog);
+  dialog.addEventListener("close", () => document.body.classList.remove("dialog-open"));
   $("#status-filter").addEventListener("change", renderOrders);
   form.elements.service.addEventListener("change", updateServiceFields);
   $("#cash-date").addEventListener("change", updateCashSummary);
