@@ -227,3 +227,42 @@ fieldset legend { padding: 0 5px; }
   .cash-methods { grid-template-columns: 1fr; }
   .cash-methods h3 { grid-column: auto; }
 }
+
+
+/* Histórico de pedidos */
+.history-section {
+  margin: 0 0 28px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.history-section .section-heading { margin-bottom: 18px; }
+.history-section input[type="date"] {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 9px 10px;
+  color: var(--text);
+  background: white;
+}
+.history-list { display: grid; gap: 10px; }
+.history-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 16px;
+  padding: 15px 17px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: #fbfcfb;
+}
+.history-card-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; }
+.history-details, .history-notes { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 13px; }
+.history-notes { color: #8a5b19; }
+.history-total { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: 17px; white-space: nowrap; }
+@media (max-width: 720px) {
+  .history-section { padding: 17px; }
+  .history-section .section-heading { gap: 12px; }
+  .history-card { grid-template-columns: 1fr; }
+  .history-total { grid-column: 1; grid-row: auto; }
+}
