@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MarmitaFácil: organização simples de pedidos, cozinha e pagamentos.">
+  <title>MarmitaFácil | Pedidos</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/orders.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="MarmitaFácil - início">
+      <span class="brand-mark">M</span>
+      <span>MarmitaFácil</span>
+    </a>
+    <span class="topbar-note">Organização da marmitaria</span>
+  </header>
+
+  <main class="container">
+    <section class="page-heading">
+      <div>
+        <p class="eyebrow">PAINEL DE PEDIDOS</p>
+        <h1>Bom dia, Marta!</h1>
+        <p class="muted">Acompanhe os pedidos e mantenha a cozinha organizada.</p>
+      </div>
+      <button class="button button-primary" id="new-order-button" type="button">+ Novo pedido</button>
+    </section>
+
+    <section class="summary-grid" aria-label="Resumo dos pedidos">
+      <article class="summary-card">
+        <span class="summary-label">Pedidos de hoje</span>
+        <strong id="total-orders">0</strong>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label">Em preparo</span>
+        <strong id="preparing-orders">0</strong>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label">Prontos</span>
+        <strong id="ready-orders">0</strong>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label">Recebido</span>
+        <strong id="received-total">R$ 0,00</strong>
+      </article>
+    </section>
+
+    <section class="orders-section">
+      <div class="section-heading">
+        <div>
+          <h2>Fila de pedidos</h2>
+          <p class="muted">Os pedidos ficam salvos neste navegador.</p>
+        </div>
+        <label class="filter-label" for="status-filter">
+          Filtrar
+          <select id="status-filter">
+            <option value="all">Todos</option>
+            <option value="Recebido">Recebidos</option>
+            <option value="Em preparo">Em preparo</option>
+            <option value="Pronto">Prontos</option>
+            <option value="Saiu para entrega">Em entrega</option>
+            <option value="Entregue">Entregues</option>
+          </select>
+        </label>
+      </div>
+      <div id="orders-list" class="orders-list" aria-live="polite">
+        <div class="empty-state">
+          <div class="empty-icon">＋</div>
+          <h3>Nenhum pedido por enquanto</h3>
+          <p>Toque em “Novo pedido” para registrar a primeira venda.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="order-dialog" class="order-dialog">
+    <form id="order-form" class="order-form">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">NOVO REGISTRO</p>
+          <h2>Novo pedido</h2>
+        </div>
+        <button class="icon-button" id="close-dialog" type="button" aria-label="Fechar">×</button>
+      </div>
+
+      <div class="form-grid">
+        <label class="field field-full">Nome do cliente
+          <input name="customer" required maxlength="60" placeholder="Ex.: João Silva">
+        </label>
+        <label class="field">Telefone
+          <input name="phone" inputmode="tel" placeholder="(11) 99999-9999">
+        </label>
+        <label class="field">Tipo de pedido
+          <select name="service">
+            <option value="Entrega">Entrega</option>
+            <option value="Retirada">Retirada</option>
+          </select>
+        </label>
+        <label class="field field-full">Endereço (se for entrega)
+          <input name="address" maxlength="120" placeholder="Rua, número e referência">
+        </label>
+        <label class="field">Marmita
+          <select name="meal" id="meal-select">
+            <option value="P">Pequena — R$ 18,00</option>
+            <option value="M" selected>Média — R$ 22,00</option>
+            <option value="G">Grande — R$ 27,00</option>
+          </select>
+        </label>
+        <label class="field">Quantidade
+          <input name="quantity" type="number" min="1" max="20" value="1" required>
+        </label>
+        <fieldset class="field field-full">
+          <legend>Personalizações</legend>
+          <div class="check-row">
+            <label><input type="checkbox" name="noBeans"> Sem feijão</label>
+            <label><input type="checkbox" name="noSalad"> Sem salada</label>
+            <label><input type="checkbox" name="extraFarofa"> Adicionar farofa (+ R$ 2,00)</label>
+          </div>
+          <label class="field notes-field">Observações
+            <input name="notes" maxlength="120" placeholder="Ex.: trocar salada por farofa">
+          </label>
+        </fieldset>
+        <label class="field">Pagamento
+          <select name="paymentMethod">
+            <option value="Pix">Pix</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão">Cartão</option>
+          </select>
+        </label>
+        <label class="field">Situação do pagamento
+          <select name="paid">
+            <option value="false">Pendente</option>
+            <option value="true">Já pago</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="price-preview">
+        <span>Total do pedido</span>
+        <strong id="price-preview">R$ 22,00</strong>
+      </div>
+      <div class="dialog-actions">
+        <button class="button button-secondary" id="cancel-dialog" type="button">Cancelar</button>
+        <button class="button button-primary" type="submit">Salvar pedido</button>
+      </div>
+    </form>
+  </dialog>
+  <footer class="footer">MarmitaFácil · Projeto acadêmico</footer>
+</body>
+</html>

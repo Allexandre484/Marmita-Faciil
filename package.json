@@ -1,0 +1,9 @@
+{
+  "name": "marmitafacil",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sistema simples de pedidos para uma pequena marmitaria.",
+  "scripts": {
+    "test": "node --test"
+  }
+}
