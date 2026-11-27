@@ -117,3 +117,26 @@ Os testes abaixo precisam ser realizados com duas pessoas. Não preencher result
 - Inclui os cenários de filtro de histórico por data, ordenação do mais recente para o mais antigo e data vazia.
 - Execução: https://github.com/Allexandre484/Marmita-Faciil/actions/runs/45999374727
 - Validação manual no navegador e teste com usuários: ainda pendentes.
+
+
+## Registro de validação — cadastro e acompanhamento do entregador (MF-13)
+
+### Cenários automatizados
+- Criar pedido de entrega com nome do entregador e confirmar que o nome fica salvo.
+- Definir o entregador após cadastrar o pedido.
+- Alterar o entregador já atribuído.
+- Rejeitar nome vazio e nome com mais de 60 caracteres.
+- Confirmar que pedidos de retirada não recebem entregador.
+
+### Cenários manuais
+- Cadastrar um pedido de entrega informando o entregador.
+- Cadastrar outro pedido sem entregador e usar o botão “Definir entregador”.
+- Alterar o nome e recarregar a página para verificar a persistência.
+- Conferir o nome no cartão do pedido e no histórico.
+- Selecionar Retirada e confirmar que endereço e entregador ficam ocultos e que o fluxo pula “Saiu para entrega”.
+- Testar em tela pequena.
+
+### Resultado
+- Testes automatizados: aguardando execução do GitHub Actions.
+- Testes manuais: pendentes; não declarar aprovação antes de testar.
+- Limitação: não há GPS, rastreamento em tempo real, cadastro/login de entregadores ou atualização remota.
