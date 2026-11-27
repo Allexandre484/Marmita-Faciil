@@ -160,3 +160,9 @@ Os testes abaixo precisam ser realizados com duas pessoas. Não preencher result
 - Limitação: integração por `wa.me` não oferece envio automático; para automação é necessário usar a WhatsApp Business Platform/API e avaliar as regras e cobranças vigentes.
 - Resultado automatizado: aguardando CI.
 - Resultado manual: pendente.
+
+
+## 27/11/2026 — Correção emergencial
+- Testes automatizados após a correção: aprovados no GitHub Actions (run 46002249306).
+- Verificação de sintaxe do JavaScript da interface adicionada ao workflow para execuções futuras.
+- Teste manual de cadastro de pedido e abertura do WhatsApp: pendente de confirmação no navegador.
