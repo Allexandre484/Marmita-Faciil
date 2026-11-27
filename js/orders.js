@@ -48,7 +48,44 @@
     return orders.filter(order => order.paid).reduce((sum, order) => sum + Number(order.total), 0);
   }
 
-  const api = { PRICES, calculateTotal, createOrder, nextStatus, sumReceived };
+
+  function localDateKey(value) {
+    const date = value instanceof Date ? value : new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function summarizeCash(orders, dateKey) {
+    const dailyOrders = orders.filter(order => localDateKey(order.createdAt) === dateKey);
+    const summary = {
+      orderCount: dailyOrders.length,
+      sales: 0,
+      received: 0,
+      pending: 0,
+      pendingCount: 0,
+      byMethod: { Pix: 0, Dinheiro: 0, "Cartão": 0 }
+    };
+    dailyOrders.forEach(order => {
+      const total = Number(order.total) || 0;
+      summary.sales += total;
+      if (order.paid) {
+        summary.received += total;
+        const method = order.paymentMethod;
+        if (Object.prototype.hasOwnProperty.call(summary.byMethod, method)) {
+          summary.byMethod[method] += total;
+        }
+      } else {
+        summary.pending += total;
+        summary.pendingCount += 1;
+      }
+    });
+    return summary;
+  }
+
+  const api = { PRICES, calculateTotal, createOrder, nextStatus, sumReceived, localDateKey, summarizeCash };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   root.MarmitaRules = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);
