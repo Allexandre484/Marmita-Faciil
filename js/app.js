@@ -17,11 +17,22 @@
   function money(value) {
     return Number(value).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
   }
+  function updateCashSummary() {
+    const dateKey = $("#cash-date").value;
+    const summary = rules.summarizeCash(orders, dateKey);
+    $("#cash-sales").textContent = money(summary.sales);
+    $("#cash-received").textContent = money(summary.received);
+    $("#cash-pending").textContent = money(summary.pending);
+    $("#cash-pending-count").textContent = `${summary.pendingCount} pedido(s) pendente(s)`;
+    $("#cash-pix").textContent = money(summary.byMethod.Pix);
+    $("#cash-cash").textContent = money(summary.byMethod.Dinheiro);
+    $("#cash-card").textContent = money(summary.byMethod["Cartão"]);
+  }
   function updateSummary() {
     $("#total-orders").textContent = orders.length;
     $("#preparing-orders").textContent = orders.filter(o => o.status === "Em preparo").length;
     $("#ready-orders").textContent = orders.filter(o => o.status === "Pronto").length;
-    $("#received-total").textContent = money(rules.sumReceived(orders));
+    $("#received-total").textContent = money(rules.sumReceived(orders));\n    updateCashSummary();
   }
   function renderOrderCard(order) {
     const custom = [
@@ -96,7 +107,7 @@
   $("#new-order-button").addEventListener("click", () => dialog.showModal());
   $("#close-dialog").addEventListener("click", () => dialog.close());
   $("#cancel-dialog").addEventListener("click", () => dialog.close());
-  $("#status-filter").addEventListener("change", renderOrders);
+  $("#status-filter").addEventListener("change", renderOrders);\n  $("#cash-date").addEventListener("change", updateCashSummary);
   form.addEventListener("input", updatePricePreview);
   form.addEventListener("change", updatePricePreview);
   form.addEventListener("submit", event => {
