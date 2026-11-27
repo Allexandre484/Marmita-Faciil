@@ -35,7 +35,7 @@ Atualize este documento a cada entrega relevante.
 - Fechamento diário detalhado e histórico por data estão planejados.
 - Substituição de salada por farofa é anotada em observações.
 - O sistema ainda não possui data/hora prevista do pedido; por isso, não calcula atrasos automaticamente.
-- Fluxo de status ainda pode ser refinado para retirada e entrega.
+- Fluxo de status específico para retirada e entrega implementado.
 
 ## Próximas adições
 | Prioridade | Adição | Critério |
@@ -64,3 +64,13 @@ Atualize este documento a cada entrega relevante.
 - Resultado dos testes:
 - Commit:
 - Pendências:
+
+
+## 2026-11-27 — Fluxo específico de retirada e entrega
+- Problema: pedidos de retirada percorriam a mesma sequência de status dos pedidos com entrega, incluindo uma etapa que não se aplica.
+- Arquivos alterados: `js/orders.js`, `js/app.js`, `tests/orders.test.js`.
+- Implementação: pedidos de retirada seguem Recebido → Em preparo → Pronto → Entregue. Pedidos de entrega seguem Recebido → Em preparo → Pronto → Saiu para entrega → Entregue. O botão informa o próximo status.
+- Testes adicionados: avanço de status para entrega; retirada pula a etapa de entrega; rejeição de status inválido.
+- Verificação: testes automatizados precisam ser executados com `npm test`; não declarar aprovação antes da execução.
+- Commits: regras `f12bdce09cc242f8eeb18aa64726c7ffea8b2f20`; interface `820c33d46e02ecad77ff0bbf13c45899c7f4a5fb`; testes `8f4926f61a7175e676945241961ddddf65c59bee`.
+- Pendências: validar manualmente os dois tipos de pedido no navegador e atualizar o Jira conforme a validação.
