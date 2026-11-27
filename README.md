@@ -20,7 +20,7 @@ Reduzir a desorganização dos pedidos recebidos pelo WhatsApp, evitar erros de 
 2. Abra a pasta do projeto.
 3. Abra o arquivo `index.html` no navegador.
 
-Os pedidos ficam armazenados no LocalStorage do navegador utilizado. Para uma demonstração em sala, use sempre o mesmo navegador e dispositivo.
+Os pedidos ficam armazenados no LocalStorage do navegador utilizado. Para uma demonstração em sala, use sempre o mesmo navegador e dispositivo. O histórico consulta os pedidos salvos localmente e não sincroniza entre dispositivos.
 
 ## Como executar os testes
 
@@ -29,6 +29,8 @@ Os pedidos ficam armazenados no LocalStorage do navegador utilizado. Para uma de
 ```bash
 npm test
 ```
+
+O GitHub Actions também executa os testes automaticamente a cada atualização da branch `main` e em pull requests.
 
 ## Estrutura
 
