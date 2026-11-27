@@ -63,6 +63,7 @@ A verificação automatizada também é executada pelo GitHub Actions a cada atu
 
 Os documentos de apoio às entregas estão na pasta [docs](docs/):
 
+- [Processo de desenvolvimento e entregas acadêmicas](docs/PROCESSO_DE_DESENVOLVIMENTO.md)
 - [Registro de adições e decisões](docs/REGISTRO_DE_ADICOES.md)
 - [Plano e registro de testes](docs/PLANO_E_REGISTRO_DE_TESTES.md)
 
