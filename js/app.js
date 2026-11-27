@@ -135,6 +135,15 @@
       notes: data.get("notes"), paymentMethod: data.get("paymentMethod"), paid: data.get("paid") === "true"
     };
   }
+  function updateServiceFields() {
+    const isDelivery = form.elements.service.value === "Entrega";
+    $("#address-field").hidden = !isDelivery;
+    $("#courier-field").hidden = !isDelivery;
+    if (!isDelivery) {
+      form.elements.address.value = "";
+      form.elements.courierName.value = "";
+    }
+  }
   function updatePricePreview() {
     try { $("#price-preview").textContent = money(rules.calculateTotal(formData())); }
     catch { $("#price-preview").textContent = "—"; }
@@ -144,15 +153,7 @@
   $("#close-dialog").addEventListener("click", () => dialog.close());
   $("#cancel-dialog").addEventListener("click", () => dialog.close());
   $("#status-filter").addEventListener("change", renderOrders);
-  form.elements.service.addEventListener("change", () => {
-    const isDelivery = form.elements.service.value === "Entrega";
-    $("#address-field").hidden = !isDelivery;
-    $("#courier-field").hidden = !isDelivery;
-    if (!isDelivery) {
-      form.elements.address.value = "";
-      form.elements.courierName.value = "";
-    }
-  });
+  form.elements.service.addEventListener("change", updateServiceFields);
   $("#cash-date").addEventListener("change", updateCashSummary);
   $("#history-date").addEventListener("change", updateHistory);
   form.addEventListener("input", updatePricePreview);
@@ -163,6 +164,7 @@
       orders.push(rules.createOrder(formData()));
       saveOrders();
       form.reset();
+      updateServiceFields();
       $("#meal-select").value = "M";
       updatePricePreview();
       dialog.close();
