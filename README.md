@@ -61,7 +61,7 @@ marmitafacil/
 - Resumo de valores recebidos.
 - Fechamento diário por data, com total vendido, recebido, pendente e divisão dos recebimentos por Pix, dinheiro e cartão.
 - Histórico de pedidos por data, com consulta dos pedidos em ordem do mais recente para o mais antigo, sem ações de alteração na fila.
-- Cadastro opcional do entregador no pedido, com possibilidade de definir ou alterar o responsável depois; pedidos de retirada não exibem essa opção.
+- Cadastro opcional do entregador no pedido, com possibilidade de definir ou alterar o responsável depois; pedidos de retirada não exibem essa opção.\n- Integração gratuita com WhatsApp por link `wa.me`: o botão no pedido abre a conversa do cliente com o resumo preenchido. A pessoa responsável ainda precisa revisar e tocar em Enviar; não há disparo automático nem uso da API oficial.
 
 ## Próximas etapas
 
