@@ -85,3 +85,13 @@ Os testes abaixo precisam ser realizados com duas pessoas. Não preencher result
 - Cenário automatizado 4: status desconhecido gera erro.
 - Cenários manuais: cadastrar um pedido de Entrega e outro de Retirada; avançar ambos e conferir as etapas exibidas no quadro.
 - Resultado da execução: pendente de execução local; rodar `npm test` na pasta do projeto. Não registrar como aprovado sem execução.
+
+
+## Registro de validação — 2026-11-27
+
+### Melhoria: fechamento diário do caixa
+- Cenário automatizado: três pedidos em 27/11/2026 (dois pagos, um pendente) e um pedido em 26/11/2026; conferir que somente os três pedidos da data selecionada são considerados.
+- Resultado esperado: vendas R$ 95,00; recebido R$ 70,00; pendente R$ 25,00; um pedido pendente; Pix R$ 30,00; dinheiro R$ 0,00; cartão R$ 40,00.
+- Cenários manuais: selecionar uma data sem pedidos; alternar entre duas datas; marcar um pedido pendente como pago e conferir a atualização; testar em tela pequena.
+- Regressão: executar `npm test`.
+- Resultado: pendente de execução local. Não marcar como aprovado antes da execução.
