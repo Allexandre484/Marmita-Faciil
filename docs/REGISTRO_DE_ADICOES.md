@@ -109,6 +109,6 @@ Atualize este documento a cada entrega relevante.
 - Regra: pedidos de retirada não precisam de entregador; ao selecionar Retirada, os campos de endereço e entregador ficam ocultos e seus valores são limpos. O fluxo de status já existente continua levando pedidos de entrega por Saiu para entrega e pedidos de retirada diretamente de Pronto para Entregue.
 - Validação: nome obrigatório ao atribuir posteriormente, removidos espaços extras e limite de 60 caracteres.
 - Testes automatizados adicionados: cadastro com entregador, atribuição posterior, alteração, rejeição de nome vazio, retirada sem entregador e limite de caracteres.
-- Testes automatizados: execução via GitHub Actions após o commit; resultado a registrar.
-- Testes manuais: conferir cadastro, atribuição/alteração, persistência após recarregar a página e comportamento de retirada.
+- Resultado dos testes automatizados: 15 aprovados e 0 reprovados no GitHub Actions, em 27/11/2026.
+- Testes manuais: conferir cadastro, atribuição/alteração, persistência após recarregar a página e comportamento de retirada; ainda pendentes.
 - Limitação: o nome é um campo livre; não existe cadastro central de entregadores, conta individual, GPS, rastreamento em tempo real nem sincronização entre dispositivos.
