@@ -140,3 +140,8 @@ Atualize este documento a cada entrega relevante.
 - Arquivos alterados: `index.html`, `js/app.js`, `css/style.css`.
 - Validação automatizada: verificar sintaxe JavaScript e executar `npm test) no GitHub Actions.
 - Validação manual pendente: abrir o site publicado, clicar em “+ Novo pedido”, conferir a janela e testar os botões “Cancelar” e “×”. A confirmação do usuário ainda é necessária.
+
+
+## Acesso à aplicação publicada
+- GitHub Pages: https://allexandre484.github.io/Marmita-Faciil/
+- Repositório: https://github.com/Allexandre484/Marmita-Faciil
