@@ -52,6 +52,7 @@ marmitafacil/
 - Personalização de marmitas.
 - Cálculo automático do total.
 - Fila de pedidos organizada por etapa da cozinha, com contagem por status.
+- Fluxo de status adaptado ao tipo de pedido: retirada não passa pela etapa de entrega.
 - Destaque visual para personalizações e observações do pedido.
 - Fila responsiva, com rolagem horizontal em telas maiores e organização em coluna no celular.
 - Registro de pagamento.
