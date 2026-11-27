@@ -130,3 +130,13 @@ Atualize este documento a cada entrega relevante.
 - Corrigido o manipulador de clique do WhatsApp e a formatação do HTML dos cartões de pedidos.
 - Ajustado o teste automatizado de validação do link `wa.me`.
 - Incluída verificação de sintaxe (`node --check`) no workflow para detectar erros no JavaScript da interface antes da publicação.
+
+
+## 2026-11-27 — Correção de abertura da janela de novo pedido
+- Relato: ao clicar em “+ Novo pedido”, a janela de cadastro não era exibida.
+- Ajuste: o botão passou a utilizar uma função própria para abrir o diálogo, verificando o suporte a `showModal()` e aplicando uma alternativa compatível quando o método não estiver disponível ou falhar.
+- Ajuste adicional: fechamento centralizado para os botões “×” e “Cancelar”; removida a classe de sobreposição ao fechar.
+- Cache: adicionada versão nos endereços dos arquivos CSS e JavaScript para solicitar os arquivos atualizados ao navegador.
+- Arquivos alterados: `index.html`, `js/app.js`, `css/style.css`.
+- Validação automatizada: verificar sintaxe JavaScript e executar `npm test) no GitHub Actions.
+- Validação manual pendente: abrir o site publicado, clicar em “+ Novo pedido”, conferir a janela e testar os botões “Cancelar” e “×”. A confirmação do usuário ainda é necessária.
