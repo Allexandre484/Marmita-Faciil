@@ -123,3 +123,10 @@ Atualize este documento a cada entrega relevante.
 - Testes automatizados adicionados para formatação do link, conteúdo e telefone inválido.
 - Testes manuais: conferir abertura no WhatsApp Web/celular, número de destino e mensagem antes do envio.
 - Resultado dos testes: aguardar execução do GitHub Actions.
+
+
+## Correção emergencial — cadastro de pedidos e WhatsApp (27/11/2026)
+- Foi identificado que a atualização do botão WhatsApp inseriu sequências de quebra de linha inválidas no arquivo `js/app.js`, impedindo a execução do JavaScript da aplicação.
+- Corrigido o manipulador de clique do WhatsApp e a formatação do HTML dos cartões de pedidos.
+- Ajustado o teste automatizado de validação do link `wa.me`.
+- Incluída verificação de sintaxe (`node --check`) no workflow para detectar erros no JavaScript da interface antes da publicação.
