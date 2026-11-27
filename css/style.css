@@ -266,3 +266,8 @@ fieldset legend { padding: 0 5px; }
   .history-card { grid-template-columns: 1fr; }
   .history-total { grid-column: 1; grid-row: auto; }
 }
+
+
+/* Cadastro e identificação do entregador */
+.order-card .order-meta strong { color: var(--text); }
+#courier-field[hidden], #address-field[hidden] { display: none; }
