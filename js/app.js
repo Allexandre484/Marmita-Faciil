@@ -43,6 +43,7 @@
         <p class="history-details">Pedido #${escapeHTML(order.id)} · ${time} · ${escapeHTML(order.service || "Entrega")}</p>
         <p class="history-details">${Number(order.quantity) || 0}x Marmita ${escapeHTML(order.meal || "—")} · ${escapeHTML(order.paymentMethod || "Sem forma de pagamento")} · <span class="payment-pill ${order.paid ? "paid" : ""}">${order.paid ? "Pago" : "Pendente"}</span></p>
         ${custom.length ? `<div class="customization-list">${custom.map(item => `<span class="customization-pill">${item}</span>`).join("")}</div>` : ""}
+        ${order.courierName ? `<p class="history-details"><strong>Entregador:</strong> ${escapeHTML(order.courierName)}</p>` : ""}
         ${order.notes ? `<p class="history-notes"><strong>Observação:</strong> ${escapeHTML(order.notes)}</p>` : ""}
         <strong class="history-total">${money(order.total)}</strong>
       </article>`;
@@ -82,12 +83,14 @@
         <div class="order-meta">#${escapeHTML(order.id)} · ${order.quantity}x Marmita ${escapeHTML(order.meal)} · ${escapeHTML(order.service)}${order.address ? " · " + escapeHTML(order.address) : ""}</div>
         ${custom.length ? `<div class="customization-list" aria-label="Personalizações">${custom.map(item => `<span class="customization-pill">${item}</span>`).join("")}</div>` : ""}
         ${order.notes ? `<div class="order-notes"><strong>Observação:</strong> ${escapeHTML(order.notes)}</div>` : ""}
+        ${order.service !== "Retirada" ? `<div class="order-meta"><strong>Entregador:</strong> ${order.courierName ? escapeHTML(order.courierName) : "Ainda não definido"}</div>` : ""}
         <div class="order-meta">${escapeHTML(order.paymentMethod)} · <span class="payment-pill ${order.paid ? "paid" : ""}">${order.paid ? "Pago" : "Pendente"}</span></div>
       </div>
       <div class="order-side">
         <strong class="order-total">${money(order.total)}</strong>
         <div class="card-actions">
           ${canAdvance ? `<button class="small-button" data-action="advance" data-id="${escapeHTML(order.id)}">Avançar para: ${escapeHTML(next)}</button>` : ""}
+          ${order.service !== "Retirada" ? `<button class="small-button" data-action="courier" data-id="${escapeHTML(order.id)}">${order.courierName ? "Alterar entregador" : "Definir entregador"}</button>` : ""}
           <button class="small-button" data-action="payment" data-id="${escapeHTML(order.id)}">${order.paid ? "Marcar pendente" : "Marcar pago"}</button>
         </div>
       </div>
@@ -127,7 +130,7 @@
     const data = new FormData(form);
     return {
       customer: data.get("customer"), phone: data.get("phone"), service: data.get("service"),
-      address: data.get("address"), meal: data.get("meal"), quantity: data.get("quantity"),
+      address: data.get("address"), courierName: data.get("courierName"), meal: data.get("meal"), quantity: data.get("quantity"),
       noBeans: data.has("noBeans"), noSalad: data.has("noSalad"), extraFarofa: data.has("extraFarofa"),
       notes: data.get("notes"), paymentMethod: data.get("paymentMethod"), paid: data.get("paid") === "true"
     };
@@ -141,6 +144,15 @@
   $("#close-dialog").addEventListener("click", () => dialog.close());
   $("#cancel-dialog").addEventListener("click", () => dialog.close());
   $("#status-filter").addEventListener("change", renderOrders);
+  form.elements.service.addEventListener("change", () => {
+    const isDelivery = form.elements.service.value === "Entrega";
+    $("#address-field").hidden = !isDelivery;
+    $("#courier-field").hidden = !isDelivery;
+    if (!isDelivery) {
+      form.elements.address.value = "";
+      form.elements.courierName.value = "";
+    }
+  });
   $("#cash-date").addEventListener("change", updateCashSummary);
   $("#history-date").addEventListener("change", updateHistory);
   form.addEventListener("input", updatePricePreview);
@@ -166,6 +178,12 @@
     if (!order) return;
     if (button.dataset.action === "advance") order.status = rules.nextStatus(order.status, order.service);
     if (button.dataset.action === "payment") order.paid = !order.paid;
+    if (button.dataset.action === "courier") {
+      const name = prompt("Informe o nome do entregador:", order.courierName || "");
+      if (name === null) return;
+      try { rules.assignCourier(order, name); }
+      catch (error) { alert(error.message); return; }
+    }
     saveOrders();
     renderOrders();
   });
