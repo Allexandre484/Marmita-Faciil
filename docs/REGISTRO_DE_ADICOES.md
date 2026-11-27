@@ -112,3 +112,14 @@ Atualize este documento a cada entrega relevante.
 - Resultado dos testes automatizados: 15 aprovados e 0 reprovados no GitHub Actions, em 27/11/2026.
 - Testes manuais: conferir cadastro, atribuição/alteração, persistência após recarregar a página e comportamento de retirada; ainda pendentes.
 - Limitação: o nome é um campo livre; não existe cadastro central de entregadores, conta individual, GPS, rastreamento em tempo real nem sincronização entre dispositivos.
+
+
+## 2026-11-27 — Integração gratuita com WhatsApp (MF-14)
+- Problema: os dados do pedido precisavam ser reorganizados manualmente para enviar uma confirmação ao cliente.
+- Implementação: botão WhatsApp nos cartões; utiliza o telefone cadastrado e gera um link oficial `wa.me` com resumo do pedido preenchido.
+- Dados incluídos: cliente, número, tipo, marmita, quantidade, personalizações, observações, endereço, entregador, pagamento e total.
+- Validação: telefone brasileiro com DDD (10 ou 11 dígitos) ou em formato internacional brasileiro (12 ou 13 dígitos iniciados por 55); número inválido impede a abertura.
+- Limite do plano gratuito: o link abre o WhatsApp e preenche a mensagem, mas a pessoa precisa revisar e enviar manualmente. Não é envio automático, API, webhook ou disparo em massa.
+- Testes automatizados adicionados para formatação do link, conteúdo e telefone inválido.
+- Testes manuais: conferir abertura no WhatsApp Web/celular, número de destino e mensagem antes do envio.
+- Resultado dos testes: aguardar execução do GitHub Actions.
