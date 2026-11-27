@@ -149,3 +149,14 @@ Os testes abaixo precisam ser realizados com duas pessoas. Não preencher result
 - Novos cenários de entregador aprovados: cadastro junto ao pedido, atribuição posterior, alteração do responsável, rejeição de nome vazio, bloqueio para retirada e limite de 60 caracteres.
 - Execução: https://github.com/Allexandre484/Marmita-Faciil/actions/runs/46000306525
 - Validação manual da interface ainda pendente.
+
+
+## Integração WhatsApp gratuita — MF-14
+- Automatizado: gerar link com telefone brasileiro formatado e mensagem codificada.
+- Automatizado: conferir se resumo contém pedido, personalizações, endereço, valor e situação do pagamento.
+- Automatizado: rejeitar telefone ausente ou com quantidade de dígitos inválida.
+- Manual: cadastrar pedido com telefone válido, clicar em WhatsApp e confirmar se o chat correto abre com a mensagem preenchida.
+- Manual: conferir que nada é enviado até a pessoa tocar em Enviar.
+- Limitação: integração por `wa.me` não oferece envio automático; para automação é necessário usar a WhatsApp Business Platform/API e avaliar as regras e cobranças vigentes.
+- Resultado automatizado: aguardando CI.
+- Resultado manual: pendente.
