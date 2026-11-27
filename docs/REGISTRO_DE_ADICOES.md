@@ -74,3 +74,16 @@ Atualize este documento a cada entrega relevante.
 - Verificação: testes automatizados precisam ser executados com `npm test`; não declarar aprovação antes da execução.
 - Commits: regras `f12bdce09cc242f8eeb18aa64726c7ffea8b2f20`; interface `820c33d46e02ecad77ff0bbf13c45899c7f4a5fb`; testes `8f4926f61a7175e676945241961ddddf65c59bee`.
 - Pendências: validar manualmente os dois tipos de pedido no navegador e atualizar o Jira conforme a validação.
+
+
+## 2026-11-27 — Fechamento diário do caixa
+- Problema: o resumo anterior mostrava apenas o total geral recebido, sem separar as vendas por dia, forma de pagamento ou valores pendentes.
+- Arquivos alterados: `index.html`, `js/app.js`, `js/orders.js`, `css/style.css`, `tests/orders.test.js`, `README.md`.
+- Implementação: painel com seletor de data; total vendido no dia; total efetivamente recebido; valor e quantidade de pedidos pendentes; recebimentos pagos separados por Pix, dinheiro e cartão.
+- Regra: vendas incluem todos os pedidos criados na data escolhida; recebido e divisão por forma de pagamento consideram somente pedidos marcados como pagos. Pendências são somadas separadamente.
+- Persistência: utiliza os pedidos já salvos no LocalStorage; não cria backend nem sincronização entre dispositivos.
+- Teste automatizado adicionado: confere filtro por data, soma de vendas, pagos, pendentes e divisão por forma de pagamento.
+- Verificação manual pendente: conferir fechamento em duas datas, alternar pagamento de pendente para pago e comparar os valores apresentados.
+- Resultado dos testes: pendente de execução local com `npm test`; não declarar aprovação antes da execução.
+- Limitação: pedidos antigos sem `createdAt` válido não entram no resumo diário.
+- Commit: será registrado após a atualização dos arquivos.
