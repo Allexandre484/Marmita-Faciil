@@ -15,10 +15,6 @@
   function createOrder(data, id = Date.now()) {
     const customer = String(data.customer || "").trim();
     if (!customer) throw new Error("Informe o nome do cliente.");
-    const customizations = [];
-    if (data.noBeans) customizations.push("Sem feijão");
-    if (data.noSalad) customizations.push("Sem salada");
-    if (data.extraFarofa) customizations.push("Farofa extra");
     return {
       id,
       customer,
@@ -39,8 +35,10 @@
     };
   }
 
-  function nextStatus(status) {
-    const flow = ["Recebido", "Em preparo", "Pronto", "Saiu para entrega", "Entregue"];
+  function nextStatus(status, service = "Entrega") {
+    const flow = service === "Retirada"
+      ? ["Recebido", "Em preparo", "Pronto", "Entregue"]
+      : ["Recebido", "Em preparo", "Pronto", "Saiu para entrega", "Entregue"];
     const index = flow.indexOf(status);
     if (index === -1) throw new Error("Status inválido.");
     return flow[Math.min(index + 1, flow.length - 1)];
