@@ -74,3 +74,14 @@ Os testes abaixo precisam ser realizados com duas pessoas. Não preencher result
 - Regressão: executar `npm test` para verificar se cálculo, personalizações, status e recebimentos continuam funcionando.
 - Resultado: pendente de execução local. Não declarar os cenários aprovados antes de testá-los.
 - Observação: a fila apresenta as etapas Recebido, Em preparo, Pronto, Saiu para entrega e Entregue. O fluxo específico de retirada ainda será desenvolvido.
+
+
+## Registro de validação — 2026-11-27
+
+### Melhoria: fluxo por tipo de pedido
+- Cenário automatizado 1: pedido de entrega em Pronto avança para Saiu para entrega.
+- Cenário automatizado 2: pedido de retirada em Pronto avança diretamente para Entregue.
+- Cenário automatizado 3: pedido de retirada em Em preparo avança para Pronto.
+- Cenário automatizado 4: status desconhecido gera erro.
+- Cenários manuais: cadastrar um pedido de Entrega e outro de Retirada; avançar ambos e conferir as etapas exibidas no quadro.
+- Resultado da execução: pendente de execução local; rodar `npm test` na pasta do projeto. Não registrar como aprovado sem execução.
