@@ -70,6 +70,21 @@
       </div>
     </section>
 
+    <section class="history-section" aria-labelledby="history-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="history-title">Histórico de pedidos</h2>
+          <p class="muted">Consulte os pedidos registrados em uma data anterior ou atual.</p>
+        </div>
+        <label class="filter-label" for="history-date">Data
+          <input id="history-date" type="date">
+        </label>
+      </div>
+      <div id="history-list" class="history-list" aria-live="polite">
+        <div class="empty-state"><h3>Nenhum pedido nesta data</h3><p>Escolha outra data para consultar o histórico.</p></div>
+      </div>
+    </section>
+
     <section class="orders-section">
       <div class="section-heading">
         <div>
