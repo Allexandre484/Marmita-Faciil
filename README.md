@@ -61,10 +61,11 @@ marmitafacil/
 - Resumo de valores recebidos.
 - Fechamento diário por data, com total vendido, recebido, pendente e divisão dos recebimentos por Pix, dinheiro e cartão.
 - Histórico de pedidos por data, com consulta dos pedidos em ordem do mais recente para o mais antigo, sem ações de alteração na fila.
+- Cadastro opcional do entregador no pedido, com possibilidade de definir ou alterar o responsável depois; pedidos de retirada não exibem essa opção.
 
 ## Próximas etapas
 
-- Melhorar o controle de entregas.
+- Validar manualmente o cadastro e a alteração do entregador.
 - Validar o histórico de pedidos e o fechamento diário do caixa com usuários.
 - Realizar testes com pelo menos duas pessoas e registrar os resultados.
 - Criar o Product Backlog, quadro Kanban e planejamento das Sprints.
