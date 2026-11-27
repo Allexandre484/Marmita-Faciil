@@ -52,7 +52,7 @@ Atualize este documento a cada entrega relevante.
 - Implementação: pedidos agrupados em colunas por status; cada coluna mostra a quantidade de pedidos; personalizações e observações receberam destaque visual.
 - Verificação: conferir manualmente a exibição com pedidos em diferentes status e em tela pequena; executar `npm test`.
 - Resultado dos testes: registrar após execução no ambiente local.
-- Commit: registrado no histórico do GitHub após a publicação desta alteração.
+- Commit da implementação: `629ad31635064f274c186f9f956cd8889b2f488e` (JavaScript); `1a0cf1e61d610fc4fcc03600a9e46c37b4826f5b` (CSS).
 - Pendências: fluxo de retirada e entrega específico; datas/horários previstos para permitir alerta de atraso.
 
 ## Modelo para nova alteração
