@@ -87,3 +87,15 @@ Atualize este documento a cada entrega relevante.
 - Resultado dos testes: pendente de execução local com `npm test`; não declarar aprovação antes da execução.
 - Limitação: pedidos antigos sem `createdAt` válido não entram no resumo diário.
 - Commit: será registrado após a atualização dos arquivos.
+
+
+## 2026-11-27 — Histórico de pedidos por data
+- Problema: pedidos antigos ficavam misturados à fila operacional, dificultando a consulta de vendas e ocorrências de dias anteriores.
+- Arquivos alterados: `index.html`, `js/app.js`, `js/orders.js`, `css/style.css`, `tests/orders.test.js` e `README.md`.
+- Implementação: nova área de histórico com seletor de data; exibe cliente, número, horário, tipo de pedido, marmitas, personalizações, observações, pagamento, status e total.
+- Organização: pedidos da data escolhida são apresentados do mais recente para o mais antigo. O histórico é somente para consulta e não oferece botões para alterar status ou pagamento.
+- Persistência: consulta os pedidos já armazenados no LocalStorage deste navegador. Não recupera dados de outros dispositivos nem pedidos que não estejam salvos.
+- Testes adicionados: filtro por data, ordenação cronológica decrescente e retorno vazio quando nenhuma data é selecionada.
+- Verificação: executar `npm test` e conferir manualmente datas com pedidos, datas sem pedidos e pedidos com personalizações.
+- Resultado dos testes: pendente de execução local; não declarar aprovação antes da execução.
+- Commit: registrado pelo GitHub após a atualização dos arquivos.
