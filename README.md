@@ -30,7 +30,7 @@ Os pedidos ficam armazenados no LocalStorage do navegador utilizado. Para uma de
 npm test
 ```
 
-O GitHub Actions também executa os testes automaticamente a cada atualização da branch `main` e em pull requests.
+O GitHub Actions também executa os testes automaticamente a cada atualização da branch `main` e em pull requests. Na execução de 27/11/2026, os 15 testes automatizados estavam aprovados.
 
 ## Estrutura
 
