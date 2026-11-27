@@ -4,6 +4,7 @@
   const $ = (selector) => document.querySelector(selector);
   const dialog = $("#order-dialog");
   const form = $("#order-form");
+  const stages = ["Recebido", "Em preparo", "Pronto", "Saiu para entrega", "Entregue"];
   let orders = loadOrders();
 
   function loadOrders() {
@@ -22,40 +23,57 @@
     $("#ready-orders").textContent = orders.filter(o => o.status === "Pronto").length;
     $("#received-total").textContent = money(rules.sumReceived(orders));
   }
+  function renderOrderCard(order) {
+    const custom = [
+      order.noBeans ? "Sem feijão" : "",
+      order.noSalad ? "Sem salada" : "",
+      order.extraFarofa ? "Farofa extra" : ""
+    ].filter(Boolean);
+    const statusClass = order.status === "Pronto" || order.status === "Entregue" ? "ready" : order.status === "Em preparo" ? "preparing" : "";
+    const next = rules.nextStatus(order.status);
+    const canAdvance = order.status !== "Entregue";
+    return `<article class="order-card">
+      <div class="order-main">
+        <div class="order-topline"><strong>${escapeHTML(order.customer)}</strong><span class="status-pill ${statusClass}">${escapeHTML(order.status)}</span></div>
+        <div class="order-meta">#${escapeHTML(order.id)} · ${order.quantity}x Marmita ${escapeHTML(order.meal)} · ${escapeHTML(order.service)}${order.address ? " · " + escapeHTML(order.address) : ""}</div>
+        ${custom.length ? `<div class="customization-list" aria-label="Personalizações">${custom.map(item => `<span class="customization-pill">${item}</span>`).join("")}</div>` : ""}
+        ${order.notes ? `<div class="order-notes"><strong>Observação:</strong> ${escapeHTML(order.notes)}</div>` : ""}
+        <div class="order-meta">${escapeHTML(order.paymentMethod)} · <span class="payment-pill ${order.paid ? "paid" : ""}">${order.paid ? "Pago" : "Pendente"}</span></div>
+      </div>
+      <div class="order-side">
+        <strong class="order-total">${money(order.total)}</strong>
+        <div class="card-actions">
+          ${canAdvance ? `<button class="small-button" data-action="advance" data-id="${escapeHTML(order.id)}">Avançar etapa</button>` : ""}
+          <button class="small-button" data-action="payment" data-id="${escapeHTML(order.id)}">${order.paid ? "Marcar pendente" : "Marcar pago"}</button>
+        </div>
+      </div>
+    </article>`;
+  }
   function renderOrders() {
     const filter = $("#status-filter").value;
-    const visible = orders.filter(o => filter === "all" || o.status === filter);
     const list = $("#orders-list");
+    const visible = orders.filter(order => filter === "all" || order.status === filter);
     if (!visible.length) {
       list.innerHTML = `<div class="empty-state"><div class="empty-icon">＋</div><h3>Nenhum pedido encontrado</h3><p>Cadastre um pedido ou altere o filtro.</p></div>`;
       updateSummary();
       return;
     }
-    list.innerHTML = visible.slice().reverse().map(order => {
-      const custom = [
-        order.noBeans ? "Sem feijão" : "",
-        order.noSalad ? "Sem salada" : "",
-        order.extraFarofa ? "Farofa extra" : ""
-      ].filter(Boolean).join(" · ");
-      const statusClass = order.status === "Pronto" || order.status === "Entregue" ? "ready" : order.status === "Em preparo" ? "preparing" : "";
-      const next = rules.nextStatus(order.status);
-      const canAdvance = order.status !== "Entregue";
-      return `<article class="order-card">
-        <div class="order-main">
-          <div class="order-topline"><strong>${escapeHTML(order.customer)}</strong><span class="status-pill ${statusClass}">${order.status}</span></div>
-          <div class="order-meta">#${order.id} · ${order.quantity}x Marmita ${order.meal} · ${order.service}${order.address ? " · " + escapeHTML(order.address) : ""}</div>
-          ${custom || order.notes ? `<div class="order-notes">${[custom, escapeHTML(order.notes)].filter(Boolean).join(" · ")}</div>` : ""}
-          <div class="order-meta">${order.paymentMethod} · <span class="payment-pill ${order.paid ? "paid" : ""}">${order.paid ? "Pago" : "Pendente"}</span></div>
+    const known = stages.map(status => {
+      const items = visible.filter(order => order.status === status);
+      return { status, items };
+    });
+    const unknown = visible.filter(order => !stages.includes(order.status));
+    list.innerHTML = known.map(({ status, items }) => `
+      <section class="stage-column" aria-label="Pedidos: ${status}">
+        <div class="stage-heading">
+          <h3>${status === "Saiu para entrega" ? "Em entrega" : status}</h3>
+          <span class="stage-count">${items.length}</span>
         </div>
-        <div class="order-side">
-          <strong class="order-total">${money(order.total)}</strong>
-          <div class="card-actions">
-            ${canAdvance ? `<button class="small-button" data-action="advance" data-id="${order.id}">Avançar: ${next}</button>` : ""}
-            <button class="small-button" data-action="payment" data-id="${order.id}">${order.paid ? "Marcar pendente" : "Marcar pago"}</button>
-          </div>
+        <div class="stage-orders">
+          ${items.length ? items.slice().reverse().map(renderOrderCard).join("") : '<p class="stage-empty">Nenhum pedido nesta etapa</p>'}
         </div>
-      </article>`;
-    }).join("");
+      </section>
+    `).join("") + (unknown.length ? `<section class="stage-column"><div class="stage-heading"><h3>Outros</h3><span class="stage-count">${unknown.length}</span></div><div class="stage-orders">${unknown.map(renderOrderCard).join("")}</div></section>` : "");
     updateSummary();
   }
   function escapeHTML(value) {
