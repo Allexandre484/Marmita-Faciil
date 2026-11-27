@@ -21,6 +21,7 @@
       phone: data.phone || "",
       service: data.service || "Entrega",
       address: data.address || "",
+      courierName: data.service === "Retirada" ? "" : String(data.courierName || "").trim(),
       meal: data.meal || "M",
       quantity: Number(data.quantity || 1),
       noBeans: Boolean(data.noBeans),
@@ -33,6 +34,15 @@
       total: calculateTotal(data),
       createdAt: new Date().toISOString()
     };
+  }
+
+  function assignCourier(order, courierName) {
+    if (order.service === "Retirada") throw new Error("Pedidos para retirada não precisam de entregador.");
+    const name = String(courierName || "").trim();
+    if (!name) throw new Error("Informe o nome do entregador.");
+    if (name.length > 60) throw new Error("O nome do entregador deve ter até 60 caracteres.");
+    order.courierName = name;
+    return order;
   }
 
   function nextStatus(status, service = "Entrega") {
@@ -93,7 +103,7 @@
     return summary;
   }
 
-  const api = { PRICES, calculateTotal, createOrder, nextStatus, sumReceived, localDateKey, filterOrdersByDate, summarizeCash };
+  const api = { PRICES, calculateTotal, createOrder, assignCourier, nextStatus, sumReceived, localDateKey, filterOrdersByDate, summarizeCash };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   root.MarmitaRules = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);
