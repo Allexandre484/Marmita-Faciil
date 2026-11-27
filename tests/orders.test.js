@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { calculateTotal, createOrder, nextStatus, sumReceived, filterOrdersByDate } = require("../js/orders.js");
+const { calculateTotal, createOrder, assignCourier, nextStatus, sumReceived, filterOrdersByDate } = require("../js/orders.js");
 
 test("calcula o valor da marmita com adicional e quantidade", () => {
   assert.equal(calculateTotal({ meal: "M", quantity: 2, extraFarofa: true }), 48);
@@ -71,4 +71,31 @@ test("filtra o histórico pela data e ordena do mais recente para o mais antigo"
 
 test("histórico sem data selecionada não retorna pedidos", () => {
   assert.deepEqual(filterOrdersByDate([{ createdAt: "2026-11-27T09:00:00-03:00" }], ""), []);
+});
+
+
+test("registra o entregador no pedido de entrega", () => {
+  const order = createOrder({ customer: "João", service: "Entrega", courierName: "Carlos", meal: "M", quantity: 1 });
+  assert.equal(order.courierName, "Carlos");
+});
+
+test("permite definir ou alterar entregador depois do cadastro", () => {
+  const order = createOrder({ customer: "Ana", service: "Entrega", meal: "P", quantity: 1 });
+  assignCourier(order, "  Marcos  ");
+  assert.equal(order.courierName, "Marcos");
+  assignCourier(order, "Paulo");
+  assert.equal(order.courierName, "Paulo");
+});
+
+test("não permite entregador vazio ou para pedido de retirada", () => {
+  const delivery = createOrder({ customer: "Bia", service: "Entrega", meal: "M", quantity: 1 });
+  const pickup = createOrder({ customer: "Leo", service: "Retirada", courierName: "Carlos", meal: "M", quantity: 1 });
+  assert.equal(pickup.courierName, "");
+  assert.throws(() => assignCourier(delivery, "   "), /Informe o nome do entregador/);
+  assert.throws(() => assignCourier(pickup, "Carlos"), /não precisam de entregador/);
+});
+
+test("rejeita nome de entregador acima de 60 caracteres", () => {
+  const order = createOrder({ customer: "Eva", service: "Entrega", meal: "M", quantity: 1 });
+  assert.throws(() => assignCourier(order, "A".repeat(61)), /até 60 caracteres/);
 });
