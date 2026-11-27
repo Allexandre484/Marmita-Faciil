@@ -95,3 +95,16 @@ Os testes abaixo precisam ser realizados com duas pessoas. Não preencher result
 - Cenários manuais: selecionar uma data sem pedidos; alternar entre duas datas; marcar um pedido pendente como pago e conferir a atualização; testar em tela pequena.
 - Regressão: executar `npm test`.
 - Resultado: pendente de execução local. Não marcar como aprovado antes da execução.
+
+
+## Registro de validação — 2026-11-27
+
+### Melhoria: histórico de pedidos por data
+- Cenário automatizado 1: informar uma data e confirmar que somente os pedidos daquele dia são retornados.
+- Cenário automatizado 2: confirmar que os pedidos aparecem do horário mais recente para o mais antigo.
+- Cenário automatizado 3: informar data vazia e confirmar que a lista fica vazia.
+- Cenários manuais: cadastrar dois pedidos em uma data; escolher essa data no histórico; conferir cliente, horário, tipo, tamanho, personalizações, observações, pagamento, status e valor; selecionar outra data sem pedidos; confirmar a mensagem de lista vazia.
+- Segurança operacional: confirmar que a consulta do histórico não apresenta botões para avançar status nem alterar pagamento.
+- Regressão: executar `npm test`.
+- Resultado: pendente de execução local. Não marcar como aprovado antes da execução.
+- Limitação: o histórico depende do LocalStorage do navegador e não sincroniza dados entre dispositivos.
