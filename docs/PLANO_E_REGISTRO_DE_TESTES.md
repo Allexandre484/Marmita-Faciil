@@ -166,3 +166,13 @@ Os testes abaixo precisam ser realizados com duas pessoas. Não preencher result
 - Testes automatizados após a correção: aprovados no GitHub Actions (run 46002249306).
 - Verificação de sintaxe do JavaScript da interface adicionada ao workflow para execuções futuras.
 - Teste manual de cadastro de pedido e abertura do WhatsApp: pendente de confirmação no navegador.
+
+
+## 27/11/2026 — Regressão da abertura do formulário
+- T01: clicar em “+ Novo pedido” e confirmar que o formulário aparece.
+- T02: fechar pelo botão “Cancelar” e confirmar que a janela desaparece.
+- T03: abrir novamente e fechar pelo botão “×”.
+- T04: repetir em navegador atualizado e em tela estreita.
+- T05: após abrir o formulário, preencher os campos obrigatórios e salvar; confirmar que o pedido aparece na fila.
+- Testes automatizados: verificação de sintaxe e suíte `npm test` no GitHub Actions.
+- Testes manuais: pendentes de confirmação no navegador do usuário.
