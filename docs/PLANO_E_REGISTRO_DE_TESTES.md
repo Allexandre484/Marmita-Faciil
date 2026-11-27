@@ -140,3 +140,12 @@ Os testes abaixo precisam ser realizados com duas pessoas. Não preencher result
 - Testes automatizados: aguardando execução do GitHub Actions.
 - Testes manuais: pendentes; não declarar aprovação antes de testar.
 - Limitação: não há GPS, rastreamento em tempo real, cadastro/login de entregadores ou atualização remota.
+
+
+### Resultado da execução automatizada — 27/11/2026
+- Ambiente: GitHub Actions, Ubuntu, Node.js 20.
+- Comando executado: `npm test`.
+- Resultado: 15 testes aprovados, 0 reprovados.
+- Novos cenários de entregador aprovados: cadastro junto ao pedido, atribuição posterior, alteração do responsável, rejeição de nome vazio, bloqueio para retirada e limite de 60 caracteres.
+- Execução: https://github.com/Allexandre484/Marmita-Faciil/actions/runs/46000306525
+- Validação manual da interface ainda pendente.
