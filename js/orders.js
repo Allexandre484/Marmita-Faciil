@@ -45,6 +45,37 @@
     return order;
   }
 
+  function buildWhatsAppLink(order) {
+    const rawPhone = String(order.phone || "").replace(/\\D/g, "");
+    const phone = rawPhone.length === 10 || rawPhone.length === 11
+      ? "55" + rawPhone
+      : rawPhone.startsWith("55") && (rawPhone.length === 12 || rawPhone.length === 13)
+        ? rawPhone
+        : "";
+    if (!phone) throw new Error("Informe um telefone válido com DDD para abrir o WhatsApp.");
+
+    const custom = [
+      order.noBeans ? "Sem feijão" : "",
+      order.noSalad ? "Sem salada" : "",
+      order.extraFarofa ? "Farofa extra" : ""
+    ].filter(Boolean);
+    const lines = [
+      "*MarmitaFácil — resumo do pedido*",
+      "Olá, " + order.customer + "! Segue o resumo do seu pedido:",
+      "Pedido #" + order.id,
+      "Tipo: " + (order.service || "Entrega"),
+      "Marmita: " + order.quantity + "x tamanho " + order.meal,
+      custom.length ? "Personalizações: " + custom.join(", ") : "",
+      order.notes ? "Observações: " + order.notes : "",
+      order.service !== "Retirada" && order.address ? "Endereço: " + order.address : "",
+      order.service !== "Retirada" && order.courierName ? "Entregador: " + order.courierName : "",
+      "Pagamento: " + order.paymentMethod + " — " + (order.paid ? "Pago" : "Pendente"),
+      "Total: R$ " + Number(order.total).toFixed(2).replace(".", ","),
+      "Obrigado pela preferência!"
+    ].filter(Boolean);
+    return "https://wa.me/" + phone + "?text=" + encodeURIComponent(lines.join("\\n"));
+  }
+
   function nextStatus(status, service = "Entrega") {
     const flow = service === "Retirada"
       ? ["Recebido", "Em preparo", "Pronto", "Entregue"]
@@ -103,7 +134,7 @@
     return summary;
   }
 
-  const api = { PRICES, calculateTotal, createOrder, assignCourier, nextStatus, sumReceived, localDateKey, filterOrdersByDate, summarizeCash };
+  const api = { PRICES, calculateTotal, createOrder, assignCourier, buildWhatsAppLink, nextStatus, sumReceived, localDateKey, filterOrdersByDate, summarizeCash };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   root.MarmitaRules = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);
