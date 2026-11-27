@@ -30,7 +30,7 @@
       order.extraFarofa ? "Farofa extra" : ""
     ].filter(Boolean);
     const statusClass = order.status === "Pronto" || order.status === "Entregue" ? "ready" : order.status === "Em preparo" ? "preparing" : "";
-    const next = rules.nextStatus(order.status);
+    const next = rules.nextStatus(order.status, order.service);
     const canAdvance = order.status !== "Entregue";
     return `<article class="order-card">
       <div class="order-main">
@@ -43,7 +43,7 @@
       <div class="order-side">
         <strong class="order-total">${money(order.total)}</strong>
         <div class="card-actions">
-          ${canAdvance ? `<button class="small-button" data-action="advance" data-id="${escapeHTML(order.id)}">Avançar etapa</button>` : ""}
+          ${canAdvance ? `<button class="small-button" data-action="advance" data-id="${escapeHTML(order.id)}">Avançar para: ${escapeHTML(next)}</button>` : ""}
           <button class="small-button" data-action="payment" data-id="${escapeHTML(order.id)}">${order.paid ? "Marcar pendente" : "Marcar pago"}</button>
         </div>
       </div>
@@ -118,7 +118,7 @@
     if (!button) return;
     const order = orders.find(item => String(item.id) === button.dataset.id);
     if (!order) return;
-    if (button.dataset.action === "advance") order.status = rules.nextStatus(order.status);
+    if (button.dataset.action === "advance") order.status = rules.nextStatus(order.status, order.service);
     if (button.dataset.action === "payment") order.paid = !order.paid;
     saveOrders();
     renderOrders();
