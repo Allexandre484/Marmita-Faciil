@@ -17,6 +17,37 @@
   function money(value) {
     return Number(value).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
   }
+  function updateHistory() {
+    const dateKey = $("#history-date").value;
+    const matches = rules.filterOrdersByDate(orders, dateKey);
+    const list = $("#history-list");
+    if (!matches.length) {
+      list.innerHTML = '<div class="empty-state"><h3>Nenhum pedido nesta data</h3><p>Escolha outra data ou confira se existem pedidos salvos.</p></div>';
+      return;
+    }
+    list.innerHTML = matches.map(order => {
+      const custom = [
+        order.noBeans ? "Sem feijão" : "",
+        order.noSalad ? "Sem salada" : "",
+        order.extraFarofa ? "Farofa extra" : ""
+      ].filter(Boolean);
+      const created = new Date(order.createdAt);
+      const time = Number.isNaN(created.getTime())
+        ? "Horário não disponível"
+        : created.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+      return `<article class="history-card">
+        <div class="history-card-heading">
+          <strong>${escapeHTML(order.customer)}</strong>
+          <span class="status-pill ${order.status === "Entregue" ? "ready" : ""}">${escapeHTML(order.status || "Sem status")}</span>
+        </div>
+        <p class="history-details">Pedido #${escapeHTML(order.id)} · ${time} · ${escapeHTML(order.service || "Entrega")}</p>
+        <p class="history-details">${Number(order.quantity) || 0}x Marmita ${escapeHTML(order.meal || "—")} · ${escapeHTML(order.paymentMethod || "Sem forma de pagamento")} · <span class="payment-pill ${order.paid ? "paid" : ""}">${order.paid ? "Pago" : "Pendente"}</span></p>
+        ${custom.length ? `<div class="customization-list">${custom.map(item => `<span class="customization-pill">${item}</span>`).join("")}</div>` : ""}
+        ${order.notes ? `<p class="history-notes"><strong>Observação:</strong> ${escapeHTML(order.notes)}</p>` : ""}
+        <strong class="history-total">${money(order.total)}</strong>
+      </article>`;
+    }).join("");
+  }
   function updateCashSummary() {
     const dateKey = $("#cash-date").value;
     const summary = rules.summarizeCash(orders, dateKey);
@@ -32,7 +63,9 @@
     $("#total-orders").textContent = orders.length;
     $("#preparing-orders").textContent = orders.filter(o => o.status === "Em preparo").length;
     $("#ready-orders").textContent = orders.filter(o => o.status === "Pronto").length;
-    $("#received-total").textContent = money(rules.sumReceived(orders));\n    updateCashSummary();
+    $("#received-total").textContent = money(rules.sumReceived(orders));
+    updateCashSummary();
+    updateHistory();
   }
   function renderOrderCard(order) {
     const custom = [
@@ -107,7 +140,9 @@
   $("#new-order-button").addEventListener("click", () => dialog.showModal());
   $("#close-dialog").addEventListener("click", () => dialog.close());
   $("#cancel-dialog").addEventListener("click", () => dialog.close());
-  $("#status-filter").addEventListener("change", renderOrders);\n  $("#cash-date").addEventListener("change", updateCashSummary);
+  $("#status-filter").addEventListener("change", renderOrders);
+  $("#cash-date").addEventListener("change", updateCashSummary);
+  $("#history-date").addEventListener("change", updateHistory);
   form.addEventListener("input", updatePricePreview);
   form.addEventListener("change", updatePricePreview);
   form.addEventListener("submit", event => {
@@ -135,6 +170,9 @@
     renderOrders();
   });
 
+  const today = rules.localDateKey(new Date());
+  $("#cash-date").value = today;
+  $("#history-date").value = today;
   updatePricePreview();
   renderOrders();
 })();
