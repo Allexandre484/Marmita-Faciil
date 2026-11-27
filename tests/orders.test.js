@@ -13,8 +13,17 @@ test("salva personalizações do pedido", () => {
   assert.equal(order.total, 20);
 });
 
-test("avança o status do pedido", () => {
-  assert.equal(nextStatus("Em preparo"), "Pronto");
+test("avança o status de um pedido de entrega", () => {
+  assert.equal(nextStatus("Em preparo", "Entrega"), "Pronto");
+  assert.equal(nextStatus("Pronto", "Entrega"), "Saiu para entrega");
+});
+
+test("pedido para retirada vai de Pronto diretamente para Entregue", () => {
+  assert.equal(nextStatus("Pronto", "Retirada"), "Entregue");
+});
+
+test("pedido para retirada não passa pela etapa Saiu para entrega", () => {
+  assert.equal(nextStatus("Em preparo", "Retirada"), "Pronto");
 });
 
 test("soma somente os pedidos pagos", () => {
@@ -24,4 +33,8 @@ test("soma somente os pedidos pagos", () => {
 
 test("não permite quantidade inválida", () => {
   assert.throws(() => calculateTotal({ meal: "M", quantity: 0 }), /Quantidade inválida/);
+});
+
+test("rejeita status inválido", () => {
+  assert.throws(() => nextStatus("Cancelado", "Entrega"), /Status inválido/);
 });
