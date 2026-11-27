@@ -58,6 +58,14 @@
     return `${year}-${month}-${day}`;
   }
 
+  function filterOrdersByDate(orders, dateKey) {
+    if (!dateKey) return [];
+    return orders
+      .filter(order => localDateKey(order.createdAt) === dateKey)
+      .slice()
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  }
+
   function summarizeCash(orders, dateKey) {
     const dailyOrders = orders.filter(order => localDateKey(order.createdAt) === dateKey);
     const summary = {
@@ -85,7 +93,7 @@
     return summary;
   }
 
-  const api = { PRICES, calculateTotal, createOrder, nextStatus, sumReceived, localDateKey, summarizeCash };
+  const api = { PRICES, calculateTotal, createOrder, nextStatus, sumReceived, localDateKey, filterOrdersByDate, summarizeCash };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   root.MarmitaRules = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);
