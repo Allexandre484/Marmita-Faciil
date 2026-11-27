@@ -38,3 +38,20 @@ test("não permite quantidade inválida", () => {
 test("rejeita status inválido", () => {
   assert.throws(() => nextStatus("Cancelado", "Entrega"), /Status inválido/);
 });
+
+
+test("resume as vendas, recebimentos e pendências somente na data escolhida", () => {
+  const { summarizeCash } = require("../js/orders.js");
+  const summary = summarizeCash([
+    { createdAt: "2026-11-27T10:00:00-03:00", total: 30, paid: true, paymentMethod: "Pix" },
+    { createdAt: "2026-11-27T11:00:00-03:00", total: 25, paid: false, paymentMethod: "Dinheiro" },
+    { createdAt: "2026-11-27T12:00:00-03:00", total: 40, paid: true, paymentMethod: "Cartão" },
+    { createdAt: "2026-11-26T12:00:00-03:00", total: 99, paid: true, paymentMethod: "Pix" }
+  ], "2026-11-27");
+  assert.equal(summary.orderCount, 3);
+  assert.equal(summary.sales, 95);
+  assert.equal(summary.received, 70);
+  assert.equal(summary.pending, 25);
+  assert.equal(summary.pendingCount, 1);
+  assert.deepEqual(summary.byMethod, { Pix: 30, Dinheiro: 0, "Cartão": 40 });
+});
