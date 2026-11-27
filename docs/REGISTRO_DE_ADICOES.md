@@ -100,3 +100,15 @@ Atualize este documento a cada entrega relevante.
 - Resultado dos testes automatizados: 11 aprovados e 0 reprovados no GitHub Actions, em 27/11/2026.
 - Validação manual da interface: ainda pendente.
 - Commit: registrado pelo GitHub após a atualização dos arquivos.
+
+
+## 2026-11-27 — Cadastro e acompanhamento do entregador (MF-13)
+- Problema: a equipe não tinha um campo para identificar quem ficou responsável por levar cada pedido.
+- Arquivos alterados: `index.html`, `js/app.js`, `js/orders.js`, `css/style.css`, `tests/orders.test.js`, `README.md`.
+- Implementação: campo opcional de entregador no cadastro; identificação do responsável no cartão do pedido; ação para definir ou alterar o entregador depois do cadastro; nome também aparece no histórico.
+- Regra: pedidos de retirada não precisam de entregador; ao selecionar Retirada, os campos de endereço e entregador ficam ocultos e seus valores são limpos. O fluxo de status já existente continua levando pedidos de entrega por Saiu para entrega e pedidos de retirada diretamente de Pronto para Entregue.
+- Validação: nome obrigatório ao atribuir posteriormente, removidos espaços extras e limite de 60 caracteres.
+- Testes automatizados adicionados: cadastro com entregador, atribuição posterior, alteração, rejeição de nome vazio, retirada sem entregador e limite de caracteres.
+- Testes automatizados: execução via GitHub Actions após o commit; resultado a registrar.
+- Testes manuais: conferir cadastro, atribuição/alteração, persistência após recarregar a página e comportamento de retirada.
+- Limitação: o nome é um campo livre; não existe cadastro central de entregadores, conta individual, GPS, rastreamento em tempo real nem sincronização entre dispositivos.
