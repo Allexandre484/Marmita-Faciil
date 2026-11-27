@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { calculateTotal, createOrder, assignCourier, nextStatus, sumReceived, filterOrdersByDate } = require("../js/orders.js");
+const { calculateTotal, createOrder, assignCourier, buildWhatsAppLink, nextStatus, sumReceived, filterOrdersByDate } = require("../js/orders.js");
 
 test("calcula o valor da marmita com adicional e quantidade", () => {
   assert.equal(calculateTotal({ meal: "M", quantity: 2, extraFarofa: true }), 48);
@@ -98,4 +98,26 @@ test("não permite entregador vazio ou para pedido de retirada", () => {
 test("rejeita nome de entregador acima de 60 caracteres", () => {
   const order = createOrder({ customer: "Eva", service: "Entrega", meal: "M", quantity: 1 });
   assert.throws(() => assignCourier(order, "A".repeat(61)), /até 60 caracteres/);
+});
+
+
+test("gera link do WhatsApp com telefone brasileiro e mensagem preenchida", () => {
+  const order = createOrder({
+    customer: "Ana", phone: "(11) 99999-1234", service: "Entrega", address: "Rua A, 10",
+    courierName: "Carlos", meal: "M", quantity: 2, noBeans: true, extraFarofa: true,
+    notes: "Sem cebola", paymentMethod: "Pix", paid: false
+  }, 123);
+  const link = buildWhatsAppLink(order);
+  assert.match(link, /^https:\\/\\/wa\\.me\\/5511999991234\\?text=/);
+  const message = decodeURIComponent(link.split("?text=")[1]);
+  assert.match(message, /Pedido #123/);
+  assert.match(message, /Sem feijão/);
+  assert.match(message, /Rua A, 10/);
+  assert.match(message, /R\$ 48,00/);
+  assert.match(message, /Pendente/);
+});
+
+test("rejeita telefone ausente ou inválido para integração WhatsApp", () => {
+  assert.throws(() => buildWhatsAppLink({ phone: "", customer: "Ana" }), /telefone válido/);
+  assert.throws(() => buildWhatsAppLink({ phone: "12345", customer: "Ana" }), /telefone válido/);
 });
