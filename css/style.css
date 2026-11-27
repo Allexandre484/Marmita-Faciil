@@ -174,3 +174,56 @@ fieldset legend { padding: 0 5px; }
   .orders-list { grid-template-columns: minmax(245px, 1fr); overflow-x: visible; }
   .stage-column { min-width: 0; }
 }
+
+
+/* Fechamento diário do caixa */
+.cash-section {
+  margin: 0 0 28px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.cash-section .section-heading { margin-bottom: 18px; }
+.cash-section input[type="date"] {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 9px 10px;
+  color: var(--text);
+  background: white;
+}
+.cash-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.cash-card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: #fbfcfb;
+}
+.cash-card span, .cash-card small { color: var(--muted); font-size: 13px; }
+.cash-card strong { font-size: 23px; letter-spacing: -.03em; }
+.cash-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 17px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+}
+.cash-methods h3 { grid-column: 1 / -1; margin: 0; font-size: 14px; }
+.cash-methods div { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 13px; }
+.cash-methods strong { color: var(--text); }
+@media (max-width: 720px) {
+  .cash-section { padding: 17px; }
+  .cash-section .section-heading { gap: 12px; }
+  .cash-grid { grid-template-columns: 1fr; }
+  .cash-methods { grid-template-columns: 1fr; }
+  .cash-methods h3 { grid-column: auto; }
+}
