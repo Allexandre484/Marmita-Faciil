@@ -108,7 +108,7 @@ test("gera link do WhatsApp com telefone brasileiro e mensagem preenchida", () =
     notes: "Sem cebola", paymentMethod: "Pix", paid: false
   }, 123);
   const link = buildWhatsAppLink(order);
-  assert.match(link, /^https:\\/\\/wa\\.me\\/5511999991234\\?text=/);
+  assert.ok(link.startsWith("https://wa.me/5511999991234?text="));
   const message = decodeURIComponent(link.split("?text=")[1]);
   assert.match(message, /Pedido #123/);
   assert.match(message, /Sem feijão/);
