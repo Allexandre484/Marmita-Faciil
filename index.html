@@ -136,8 +136,11 @@
             <option value="Retirada">Retirada</option>
           </select>
         </label>
-        <label class="field field-full">Endereço (se for entrega)
+        <label class="field field-full" id="address-field">Endereço (se for entrega)
           <input name="address" maxlength="120" placeholder="Rua, número e referência">
+        </label>
+        <label class="field field-full" id="courier-field">Entregador (opcional)
+          <input name="courierName" maxlength="60" placeholder="Nome de quem fará a entrega">
         </label>
         <label class="field">Marmita
           <select name="meal" id="meal-select">
