@@ -2,6 +2,10 @@
 
 Aplicação web acadêmica para apoiar a rotina de uma pequena marmitaria, centralizando pedidos, acompanhamento da cozinha, entregas e pagamentos.
 
+## Acesso à aplicação
+
+**[Abrir MarmitaFácil no GitHub Pages](https://allexandre484.github.io/Marmita-Faciil/)**
+
 ## Objetivo
 
 Organizar os pedidos recebidos pela marmitaria, reduzir erros de personalização e facilitar o acompanhamento da produção e dos recebimentos.
