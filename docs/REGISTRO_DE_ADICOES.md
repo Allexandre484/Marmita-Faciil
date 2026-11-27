@@ -97,5 +97,6 @@ Atualize este documento a cada entrega relevante.
 - Persistência: consulta os pedidos já armazenados no LocalStorage deste navegador. Não recupera dados de outros dispositivos nem pedidos que não estejam salvos.
 - Testes adicionados: filtro por data, ordenação cronológica decrescente e retorno vazio quando nenhuma data é selecionada.
 - Verificação: executar `npm test` e conferir manualmente datas com pedidos, datas sem pedidos e pedidos com personalizações.
-- Resultado dos testes: pendente de execução local; não declarar aprovação antes da execução.
+- Resultado dos testes automatizados: 11 aprovados e 0 reprovados no GitHub Actions, em 27/11/2026.
+- Validação manual da interface: ainda pendente.
 - Commit: registrado pelo GitHub após a atualização dos arquivos.
