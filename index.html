@@ -47,6 +47,29 @@
       </article>
     </section>
 
+    <section class="cash-section" aria-labelledby="cash-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="cash-title">Fechamento do caixa</h2>
+          <p class="muted">Confira as vendas e os recebimentos do dia selecionado.</p>
+        </div>
+        <label class="filter-label" for="cash-date">Data
+          <input id="cash-date" type="date">
+        </label>
+      </div>
+      <div class="cash-grid">
+        <article class="cash-card"><span>Vendido no dia</span><strong id="cash-sales">R$ 0,00</strong></article>
+        <article class="cash-card"><span>Recebido</span><strong id="cash-received">R$ 0,00</strong></article>
+        <article class="cash-card"><span>Pendente</span><strong id="cash-pending">R$ 0,00</strong><small id="cash-pending-count">0 pedidos</small></article>
+      </div>
+      <div class="cash-methods">
+        <h3>Recebido por forma de pagamento</h3>
+        <div><span>Pix</span><strong id="cash-pix">R$ 0,00</strong></div>
+        <div><span>Dinheiro</span><strong id="cash-cash">R$ 0,00</strong></div>
+        <div><span>Cartão</span><strong id="cash-card">R$ 0,00</strong></div>
+      </div>
+    </section>
+
     <section class="orders-section">
       <div class="section-heading">
         <div>
