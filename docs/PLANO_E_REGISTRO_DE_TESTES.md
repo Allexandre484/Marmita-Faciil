@@ -108,3 +108,12 @@ Os testes abaixo precisam ser realizados com duas pessoas. Não preencher result
 - Regressão: executar `npm test`.
 - Resultado: pendente de execução local. Não marcar como aprovado antes da execução.
 - Limitação: o histórico depende do LocalStorage do navegador e não sincroniza dados entre dispositivos.
+
+
+### Resultado da execução automatizada — 27/11/2026
+- Ambiente: GitHub Actions, Ubuntu, Node.js 20.
+- Comando executado: `npm test`.
+- Resultado: 11 testes aprovados, 0 reprovados, 0 ignorados.
+- Inclui os cenários de filtro de histórico por data, ordenação do mais recente para o mais antigo e data vazia.
+- Execução: https://github.com/Allexandre484/Marmita-Faciil/actions/runs/45999374727
+- Validação manual no navegador e teste com usuários: ainda pendentes.
